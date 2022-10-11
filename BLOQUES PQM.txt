@@ -1,0 +1,57 @@
+!transition_variables
+!IS BLOCK
+L_GDP_GAP
+MCI
+L_GDP_RW_GAP
+RR_GAP
+L_Z_GAP
+L_GDP
+L_GDP_BAR
+
+!PC block
+DLA_CPI
+RMC
+E_DLA_CPI
+L_CPI
+
+! uip block
+i
+s
+PREM
+
+!Monetary rule
+pi
+
+!RW block
+
+!transition_shocks
+SHK_L_GDP_GAP
+SHK_DLA_CPI
+SHK_S
+SHK_i
+
+!parameters
+b1
+b2
+b3
+b4
+a1
+a2
+a3
+delta_pi
+delta_gdp
+
+!transition_equations
+L_GDP_GAP=b1*L_GDP_GAP{-1}-b2*MCI+b3*L_GDP_RW_GAP+SHK_L_GDP_GAP
+MCI=b4*RR_GAP+(1-b4)*(-L_Z_GAP)
+i= i_RW + i{+1}-s
+s=s{+1}+i_RW-i+((PREM)/4)+SHK_S
+i=delta_pi*pi{+1}+delta_gdp*L_GDP_GAP+SHK_i
+!measurement_variables
+OBS_L_GDP
+!measurement_equations
+OBS_L_GDP=L_ GDP
+
+!PC BLOCK
+
+PI=a1*PI{-1}+(1-a1)
